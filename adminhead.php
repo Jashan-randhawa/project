@@ -11,7 +11,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <title>Home</title>
     <link rel="stylesheet" href="./admin.css">
-   
+
     <script class=" text/javascript ">
     //    function fun(val){
     //        document.getElementById('seat_no').value = val;
@@ -19,10 +19,10 @@
     </script>
 </head>
 
-<body onload="call()" >
+<body onload="call()">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light ">
-            
+
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mycollapsediv"
                 aria-controls="mycollapsediv" aria-expanded="false" aria-label="toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,43 +31,25 @@
                 <ul class="navbar-nav mr-auto mt-2 ml-5 col-lg-3 mr-auto flex-column vertical-nav bar">
                     <li>
                         <div class="row" style=" padding-left: 30px; ">
-                            <img src="./images/bus.svg" alt="" style=" width: 35px; height: 25px; margin-top: 0px; ">
-                            <a href="./Homepage.php" style=" text-decoration: none ; color: black; " ><h4>Bus Service</h4></a>
+                            <img src="../images/bus.svg" alt="" style=" width: 35px; height: 25px; margin-top: 0px; ">
+                            <a href="../Homepage.php" style=" text-decoration: none; color: black; " > <h4>Bus Service</h4></a>
                         </div>
                     </li>
                     <li>
-                        <img src="./images/userav-min.png" alt="" class=" img-fluid ">
-                        <h4 class=" text-center"><?php echo $_SESSION['name']; ?></h4>
-                        <h6 class=" text-center">system administration</h6>
+                        <img src="../images/userav-min.png" alt="" class=" img-fluid ">
+                        <h4 class=" text-center">User</h4>
+                        <h6 class=" text-center"><?php echo $_SESSION['name']; ?></h6>
                     </li>
-                     <li class="nav-item active">
-                        <a href="./admin.php" data-value="Dashboard" class="nav-link">Dashboard</a>
+                    <li>
+                        <a href="./admin.php" class=" col-lg-3 " style=" text-decoration: none ; color: black; " >New Booking</a>
                     </li>
-                    <li class=" nav-item active">
-                        <a href="./buses.php" data-value="about" class="nav-link">Buses</a>
-                    </li>
-                    <a href="./route.php" data-value="contact" class="nav-link">Routes</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="costumer.php" class="nav-link">Costumer</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="booking.php" class="nav-link">Booking</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="seat.php" class="nav-link">Seats</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="addadmin.php" class="nav-link">New Admin</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="query.php" class="nav-link">Query</a>
+                    <li>
+                        <a href="./userbooking.php" class=" col-lg-3 " style=" text-decoration: none ; color: black; " >Your Booking</a>
                     </li>
                     <li>
                         <form action="" method="post">
-                        <input type="submit" value="logout" name="logout" class=" btn btn-link col-lg-6 " style=" text-decoration: none; color: black; " >
+                            <button type="submit" value="logout" name="logout" class=" btn btn-link col-lg-3 " style=" text-decoration: none; color: black; " >logout</button>
                         </form>
                     </li>
-                </ul>
             </div>
         </nav>

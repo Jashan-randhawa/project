@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <?php include_once("./adminsession.php") ?>
+    <?php include_once("./usersession.php"); ?>
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light ">
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mycollapsediv"
@@ -25,47 +25,124 @@
                 <ul class="navbar-nav mr-auto mt-2 ml-5 col-lg-3 mr-auto flex-column vertical-nav bar">
                     <li>
                         <div class="row" style=" padding-left: 30px; ">
-                            <img src="./images/bus.svg" alt="" style=" width: 35px; height: 25px; margin-top: 0px; ">
-                            <h4>Bus Service</h4>
+                            <img src="../images/bus.svg" alt="" style=" width: 35px; height: 25px; margin-top: 0px; ">
+                            <a href="../Homepage.php" style=" text-decoration: none; color: black; ">
+                                <h4>Bus Service</h4>
+                            </a>
                         </div>
                     </li>
                     <li>
-                        <img src="./images/userav-min.png" alt="" class=" img-fluid ">
-                        <h4 class=" text-center"><?php echo $_SESSION['name']; ?></h4>
-                        <h6 class=" text-center">system administration</h6>
+                        <img src="../images/userav-min.png" alt="" class=" img-fluid ">
+                        <h4 class=" text-center">User</h4>
+                        <h6 class=" text-center">
+                            <?php echo $_SESSION['name']; ?>
+                        </h6>
                     </li>
-                    <li class="nav-item active">
-                        <a href="./admin.php" data-value="Dashboard" class="nav-link">Dashboard</a>
+                    <li>
+                        <a href="./admin.php" class=" col-lg-3 " style=" text-decoration: none ; color: black; ">New
+                            Booking</a>
                     </li>
-                    <li class=" nav-item active">
-                        <a href="./buses.php" data-value="Buses" class="nav-link">Buses</a>
-                    </li>
-                    <a href="./route.php" data-value="contact" class="nav-link">Routes</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="./costumer.php" class="nav-link">Costumer</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="./booking.php" class="nav-link">Booking</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="./seat.php" class="nav-link">Seats</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="addadmin.php" class="nav-link">New Admin</a>
-                    </li>
-                    <li class=" nav-item active">
-                        <a href="query.php" class="nav-link">Query</a>
+                    <li>
+                        <a href="./userbooking.php" class=" col-lg-3 "
+                            style=" text-decoration: none ; color: black; ">Your Booking</a>
                     </li>
                     <li>
                         <form action="" method="post">
-                        <input type="submit" value="logout" name="logout" class=" btn btn-link col-lg-6 " style=" text-decoration: none; color: black; " >
+                            <input type="submit" value="logout" name="logout" class=" btn btn-link col-lg-6 "
+                                style=" text-decoration: none; color: black; ">
                         </form>
                     </li>
-                </ul>
             </div>
         </nav>
-        <?php include_once("./dashboard.php"); ?>
+        <section class=" col-lg-10 col-md-10 col-sm-12 mt-5 " style=" float: right; ">
+            <h1 class=" text-center mb-5 ">Welcome to Our Bus Service Choose Your Destination to Travel</h1>
+            <div class="card col-lg-10 col-md-10 col-sm-12" style=" margin: auto ; ">
+                <div class=" card-body ">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="city">Your City :</label>
+                            <br>
+                            <select name="from" class="col-lg-6 col-md-6 col-sm-12" id="from" required>
+                                <option value="">Select Your City</option>
+                                <?php
+                                include_once("./db_con.php");
+                                $qry = "SELECT city1 FROM route";
+                                $resultset = mysqli_query($link, $qry);
+                                while ($row = mysqli_fetch_assoc($resultset)) {
+                                    ?>
+                                    <option value="<?php echo $row['city1']; ?>"><?php echo $row['city1']; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="#">Destination :</label>
+                            <br>
+                            <select name="to" class="col-lg-6 col-md-6 col-sm-12" id="to" required>
+                                <option value="">Select Your Destination</option>
+                                <?php
+                                include_once("./db_con.php");
+                                $qry = "select city2 from route";
+                                $resultset = mysqli_query($link, $qry);
+                                while ($row = mysqli_fetch_assoc($resultset)) {
+                                    ?>
+                                    <option value="<?php echo $row['city2']; ?>"><?php echo $row['city2']; ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" min="<?php
+                            $currentDate = date('Y-m-d');
+                            echo $currentDate; ?>" name="date" id="date" class="form-control" placeholder="Enter Date" />
+                        </div>
+                        <div class=" form-group ">
+                            <button type="submit" name="subbtn" class=" btn btn-info btn-block ">Check Avialable
+                                Buses</button>
+                        </div>
+                        <?php
+                        if (isset($_POST['subbtn'])) {
+                            $mytable = <<<Tab
+        <div class="table-responsive" style="margin-top:10px;">
+        <table class="table table-bordered table-striped" >
+        <tr>
+        <th>#</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Bus Number</th>
+        <th>Time</th>
+        <th>Price</th>
+        <th>Booking</th>
+        </tr>
+        Tab;
+
+                            include_once("./db_con.php");
+                            $qry = "select * from route  where city1='$_POST[from]' and city2='$_POST[to]'";
+                            $resultset = mysqli_query($link, $qry);
+                            while ($row = mysqli_fetch_assoc($resultset)) {
+                                $mytable = $mytable . "
+        <tr><td>$row[sno]</td>
+        <td>$row[city1]</td>
+        <td>$row[city2]</td>
+        <td>$row[busno]</td>
+        <td>$row[time]</td>
+        <td>$row[price]</td>
+        <td><a href='./booking.php?city1=$row[city1]&city2=$row[city2]&bus=$row[busno]&time=$row[time]&price=$row[price]&date=$_POST[date]' class='btn btn-warning'>Book Seat</a></td></tr>";
+                            }
+                            $mytable = $mytable . "</table></div>";
+                            echo $mytable;
+
+                        }
+
+
+                        ?>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
