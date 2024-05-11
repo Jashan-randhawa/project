@@ -1,3 +1,4 @@
+<?php include_once("./adminsession.php") ?>
 <?php include_once("./header1.php"); ?>
 <section id="image">
     <div class=" card-img-overlay ">

@@ -1,3 +1,4 @@
+<?php include_once("./adminsession.php") ?>
 <?php include_once("./header1.php"); ?>
 <section id="image" >
     <div class=" card-img-overlay " >
@@ -24,6 +25,10 @@
                   <input type="email" name="email" class="form-control" value="<?php echo $row['email']; ?>" placeholder="Enter your email" />
                 </div>
                 <div class="form-group">
+                  <label for="Password">Password :</label>
+                  <input type="text" name="pwd" class="form-control" value="<?php echo $row['pwd']; ?>" placeholder="Enter your email" />
+                </div>
+                <div class="form-group">
                   <label for="Phone">Phone :</label>
                   <input type="tel" name="phone" class="form-control" value="<?php echo $row['phone']; ?>" placeholder="Enter your number" />
                 </div>
@@ -39,6 +44,7 @@
                         include_once("./db_con.php");
                         $qry = "Update costumer set name='$_POST[unm]',
                         email='$_POST[email]',
+                        pwd='$_POST[pwd]',
                         phone='$_POST[phone]',
                         address='$_POST[address]'";
                         $resultset = mysqli_query($link, $qry);
